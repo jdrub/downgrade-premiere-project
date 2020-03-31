@@ -20,6 +20,7 @@ fi
 printf "copying file... "
 # make a copy of the file replace the extension with .gz
 base=$(basename -- "$1")
+dir=$(dirname $1)
 name=${base%.*}
 name=${name:-$base} # don't consider .bashrc the extension in /foo/.bashrc
 new_file=$dir${name}_downgrade
@@ -33,7 +34,7 @@ printf "${GREEN}done.${DEF}\n"
 
 # replace the premiere version with "1"
 printf "updating xml file... "
-sed -i -E "s/\(<Project ObjectID.*Version=\"\).*\(\"\)/\11\2/" "$new_file"
+sed -i "" "s/\(<Project ObjectID.*Version=\"\).*\(\"\)/\11\2/" "$new_file"
 printf "${GREEN}done.${DEF}\n"
 
 # re-zip the file
